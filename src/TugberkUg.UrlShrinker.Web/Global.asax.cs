@@ -21,8 +21,10 @@ namespace TugberkUg.UrlShrinker.Web {
 
     public class MvcApplication : System.Web.HttpApplication {
 
+        [Obsolete]
         public static IDocumentStore Store  { get; set; }
 
+        [Obsolete]
         private void registerDocumentStore() {
 
             var parser = ConnectionStringParser<RavenConnectionStringOptions>.FromConnectionStringName("RavenDB");
@@ -71,7 +73,8 @@ namespace TugberkUg.UrlShrinker.Web {
             Configure(GlobalConfiguration.Configuration);
             RegisterRoutes(RouteTable.Routes);
 
-            registerDocumentStore();
+            //I am initializing documentstore through IoC container
+            //registerDocumentStore();
 
             AutofacWebAPI.Initialize();
         }

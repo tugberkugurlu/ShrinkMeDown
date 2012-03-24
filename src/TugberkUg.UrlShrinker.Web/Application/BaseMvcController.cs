@@ -7,6 +7,7 @@ using Raven.Client;
 
 namespace TugberkUg.UrlShrinker.Web.Application {
 
+    [Obsolete]
     public class BaseMvcController : Controller {
 
         public IDocumentSession RavenSession { get; private set; }

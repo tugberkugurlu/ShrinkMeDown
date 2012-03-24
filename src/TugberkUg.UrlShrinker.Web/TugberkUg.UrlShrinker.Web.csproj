@@ -171,6 +171,10 @@
     <Compile Include="Application\BaseApiController.cs" />
     <Compile Include="Application\BaseMvcController.cs" />
     <Compile Include="Application\Constants.cs" />
+    <Compile Include="Application\Services\AuthorizationService.cs" />
+    <Compile Include="Application\Services\FormsAuthenticationService.cs" />
+    <Compile Include="Application\Services\IAuthorizationService.cs" />
+    <Compile Include="Application\Services\IFormsAuthenticationService.cs" />
     <Compile Include="Application\UrlShrinkerApiKeyAuthorizer.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Global.asax.cs">

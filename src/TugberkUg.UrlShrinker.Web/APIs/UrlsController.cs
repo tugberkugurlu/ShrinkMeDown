@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,13 +14,20 @@ using TugberkUg.Web.Http.Filters;
 namespace TugberkUg.UrlShrinker.Web.APIs {
 
     [ApiKeyAuth("apiKey", typeof(UrlShrinkerApiKeyAuthorizer))]
-    public class UrlsController : BaseApiController {
+    public class UrlsController : ApiController {
 
-        public UrlsController() { }
+        private readonly IDocumentSession _ravenSession;
+
+        public UrlsController(IDocumentStore documentStore) {
+
+            _ravenSession = documentStore.OpenSession(
+                Constants.UrlShortenerDbName
+            );
+        }
 
         public IEnumerable<ShortenedUrl> GetShortenedUrls() {
 
-            var shortenedUrls = RavenSession.Query<ShortenedUrl>();
+            var shortenedUrls = _ravenSession.Query<ShortenedUrl>();
 
             return
                 shortenedUrls;
@@ -39,8 +47,8 @@ namespace TugberkUg.UrlShrinker.Web.APIs {
 
             shortenedUrl.CreatedOn = DateTime.Now;
 
-            RavenSession.Store(shortenedUrl);
-            RavenSession.SaveChanges();
+            _ravenSession.Store(shortenedUrl);
+            _ravenSession.SaveChanges();
 
             var response = new HttpResponseMessage<ShortenedUrl>(
                 shortenedUrl, 
@@ -48,7 +56,11 @@ namespace TugberkUg.UrlShrinker.Web.APIs {
             );
 
             response.Headers.Location = new Uri(
-                string.Format("http://tugberk.me/{0}", shortenedUrl.Alias)
+                string.Format(
+                    "{1}/{0}",
+                    ConfigurationManager.AppSettings["WebAppBaseAddress"], 
+                    shortenedUrl.Alias
+                )
             );
 
             return

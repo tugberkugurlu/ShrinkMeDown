@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\ReservedAlias.cs" />
     <Compile Include="DataAccess\ShortenedUrl.cs" />
+    <Compile Include="DataAccess\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@ using Raven.Client;
 
 namespace TugberkUg.UrlShrinker.Web.Application {
 
+    [Obsolete]
     public class BaseApiController : ApiController {
 
         public IDocumentSession RavenSession { get; private set; }

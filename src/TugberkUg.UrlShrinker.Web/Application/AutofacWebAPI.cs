@@ -24,6 +24,14 @@ namespace TugberkUg.UrlShrinker.Web.Application {
 
             //builder.RegisterType<WordRepository>().As<IWordRepository>();
 
+            builder.RegisterType<DocumentStore>().As<IDocumentStore>().
+                OnActivating(x => {
+
+                    x.Instance.Url = "http://localhost:90";
+                    x.Instance.Initialize();
+                }).
+                SingleInstance();
+
             return
                 builder.Build();
         }
