@@ -61,6 +61,11 @@ namespace TugberkUg.UrlShrinker.Web {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "DefaultClientRoute",
+                url: "client/{controller}/{action}/{id}",
+                defaults: new { controller = "client", action = "index", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "DefaultMvc",
                 url: "{parameter}",
                 defaults: new { controller = "default", action = "index", parameter = UrlParameter.Optional  }
@@ -77,6 +82,7 @@ namespace TugberkUg.UrlShrinker.Web {
             //registerDocumentStore();
 
             AutofacWebAPI.Initialize();
+            AutofacMVC3.Initialize();
         }
     }
 }

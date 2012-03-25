@@ -4,9 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <script type="text/javascript" src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+    <script src="~/Scripts/modernizr-2.0.6-development-only.js"></script>
 </head>
 <body>
-    @RenderBody()
+    <header>
+        
+    </header>
+    <div class="container">.
+        @RenderBody()
+    </div>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/knockout-2.0.0.debug.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @RenderSection("scripts", false)
 </body>
 </html>

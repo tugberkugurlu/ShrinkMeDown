@@ -1,0 +1,51 @@
+﻿@model TugberkUg.UrlShrinker.Data.DataAccess.User
+@{
+    ViewBag.Title = "LogOn";
+}
+@section scripts {
+    <script src="~/Scripts/twitter-bootstrap/bootstrap-modal.js"></script>
+    <script>
+        (function () {
+            $(function () {
+                $("#logonModal").modal({
+                    keyboard: false,
+                    backdrop: false
+                });
+            });
+        }());
+    </script>
+}
+
+<div id="logon-backdrop"></div>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="modal" id="logonModal">
+      <div class="modal-header">
+        <h3>Logon Area</h3>
+      </div>
+      <div class="modal-body">
+        <div class="editor-label">
+            User Name: 
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(x => x.UserName, new { autocomplete = "off" })
+            @Html.ValidationMessageFor(x => x.UserName)
+        </div>
+          
+        <div class="editor-label">
+            Password: 
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(x => x.Password)
+            @Html.ValidationMessageFor(x => x.Password)
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Logon" />
+      </div>
+    </div>
+    
+}

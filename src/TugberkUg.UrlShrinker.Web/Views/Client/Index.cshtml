@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts {
+    <script src="~/Scripts/App/URLClientViewModel.js"></script>
+}
+
+<h1>URLs</h1>
+
+<section id="urls">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Alias</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: urls">
+            <tr>
+                <td>
+                    <span data-bind="text: Id"></span>
+                </td>
+                <td>
+                    <span data-bind="text: Alias"></span>
+                </td>
+                <td>
+                    <span data-bind="text: Url"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>

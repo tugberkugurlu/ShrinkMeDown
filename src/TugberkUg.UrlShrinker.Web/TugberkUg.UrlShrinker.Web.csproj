@@ -176,6 +176,8 @@
     <Compile Include="Application\Services\IAuthorizationService.cs" />
     <Compile Include="Application\Services\IFormsAuthenticationService.cs" />
     <Compile Include="Application\UrlShrinkerApiKeyAuthorizer.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -183,8 +185,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\App\URLClientViewModel.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -196,6 +207,18 @@
     <Content Include="Scripts\knockout-2.0.0.debug.js" />
     <Content Include="Scripts\knockout-2.0.0.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-alert.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-button.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-carousel.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-collapse.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-dropdown.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-modal.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-popover.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-scrollspy.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-tab.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-tooltip.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-transition.js" />
+    <Content Include="Scripts\twitter-bootstrap\bootstrap-typeahead.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -222,6 +245,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\FileSystemPush.pubxml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

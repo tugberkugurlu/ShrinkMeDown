@@ -10,20 +10,22 @@ namespace TugberkUg.UrlShrinker.Web.Application.Services {
 
         private readonly IDocumentSession _ravenSession;
 
-        public AuthorizationService(IDocumentSession ravenSession) {
+        public AuthorizationService(IDocumentStore documentStore) {
 
-            _ravenSession = ravenSession;
-        }
-
-        //temporary
-        public AuthorizationService() {
-
-            _ravenSession = MvcApplication.Store.OpenSession(Constants.UrlShortenerDbName);
+            _ravenSession = documentStore.OpenSession(
+                Constants.UrlShortenerDbName
+            );
         }
 
         public bool Authorize(string userName, string password) {
 
-            throw new NotImplementedException();
+            var user = _ravenSession.Query<TugberkUg.UrlShrinker.Data.DataAccess.User>()
+                .FirstOrDefault(x => x.UserName == userName);
+
+            if (user == null)
+                return false;
+
+            return isEqual(password, user.Password);
         }
 
         public bool ChangePassword(string userName, string oldPassword, string newPassword) {
@@ -31,7 +33,7 @@ namespace TugberkUg.UrlShrinker.Web.Application.Services {
             throw new NotImplementedException();
         }
 
-        public Data.DataAccess.User CreateUser(string userName, string password, string email) {
+        public void CreateUser(string userName, string password, string email) {
 
             _ravenSession.Store(new TugberkUg.UrlShrinker.Data.DataAccess.User { 
                 IsApproved = true,
@@ -39,45 +41,28 @@ namespace TugberkUg.UrlShrinker.Web.Application.Services {
                 Password = getHashedPassword(password),
                 HashAlgorithm = "SHA512"
             });
-
-            throw new NotImplementedException();
+            _ravenSession.SaveChanges();
         }
 
         //private helpers
         private string getHashedPassword(string rawPassword) {
 
-            string id = Guid.Parse("8681941A-76C2-4120-BC34-F800B5AAB5A5".ToLower()).ToString();
-            string date = DateTime.Today.ToString("yyyy-MM-dd");
-
-            Console.WriteLine(id);
-            Console.WriteLine(date);
-
             using (System.Security.Cryptography.SHA512Managed hashTool =
                 new System.Security.Cryptography.SHA512Managed()) {
 
-                Byte[] PasswordAsByte = System.Text.Encoding.UTF8.GetBytes(string.Concat(id, date));
+                Byte[] PasswordAsByte = System.Text.Encoding.UTF8.GetBytes(rawPassword);
                 Byte[] EncryptedBytes = hashTool.ComputeHash(PasswordAsByte);
                 hashTool.Clear();
 
-                Console.WriteLine(Convert.ToBase64String(EncryptedBytes));
-
+                return Convert.ToBase64String(EncryptedBytes);
             }
-
-            using (System.Security.Cryptography.SHA1Managed hashTool = new System.Security.Cryptography.SHA1Managed()) {
-
-                Byte[] PasswordAsByte = System.Text.Encoding.UTF8.GetBytes("dslfdkjLK85kldhnv$n000#knf");
-                Byte[] EncryptedBytes = hashTool.ComputeHash(PasswordAsByte);
-                hashTool.Clear();
-
-                Console.WriteLine(Convert.ToBase64String(EncryptedBytes));
-            }
-
-            return "";
         }
 
         private bool isEqual(string rawPassword, string hashedPasword) {
 
-            return false;
+            return string.Equals(
+                getHashedPassword(rawPassword), hashedPasword
+            );
         }
     }
 }
