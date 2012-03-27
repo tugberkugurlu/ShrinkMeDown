@@ -44,10 +44,18 @@ namespace TugberkUg.UrlShrinker.Web.Controllers {
 
                 _formsAuthenticationService.SignIn(user.UserName, true);
 
-                RedirectToAction("client", "index");
+                return RedirectToAction("index", "client");
             }
 
             return View();
+        }
+
+        [Authorize]
+        public ActionResult LogOff() {
+
+            _formsAuthenticationService.SignOut();
+
+            return RedirectToAction("index", "client");
         }
     }
 }

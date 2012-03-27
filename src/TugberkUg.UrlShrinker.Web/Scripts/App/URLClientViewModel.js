@@ -1,5 +1,6 @@
 ﻿/// <reference path="../jquery-1.7.1.js" />
 /// <reference path="../knockout-2.0.0.debug.js" />
+/// <reference path="../twitter-bootstrap/bootstrap-modal.js" />
 
 window.urlShrinker = {};
 
@@ -11,8 +12,18 @@ window.urlShrinker = {};
     $.getJSON("/api/urls", function (result) {
 
         vm.urls = buildUrlsObservableArray(result);
-        ko.applyBindings(vm);
+        bindViewModel();
     });
+
+    vm.addNew = function() {
+
+        $("#addNewModal").modal("show");
+    };
+
+    function bindViewModel() {
+
+        ko.applyBindings(vm);
+    }
 
     function buildUrlsObservableArray(json) {
 
@@ -45,4 +56,4 @@ window.urlShrinker = {};
         self.UpdatedOn = ko.observable();
     }
 
-}(urlShrinker));
+} (urlShrinker));

@@ -247,6 +247,7 @@
     <None Include="Properties\PublishProfiles\FileSystemPush.pubxml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

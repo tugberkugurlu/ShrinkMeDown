@@ -57,7 +57,7 @@ namespace TugberkUg.UrlShrinker.Web.APIs {
 
             response.Headers.Location = new Uri(
                 string.Format(
-                    "{1}/{0}",
+                    "{0}/{1}",
                     ConfigurationManager.AppSettings["WebAppBaseAddress"], 
                     shortenedUrl.Alias
                 )
