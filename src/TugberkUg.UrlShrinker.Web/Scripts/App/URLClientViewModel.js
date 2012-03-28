@@ -9,17 +9,31 @@ window.urlShrinker = {};
 
     var vm = {};
 
-    $.getJSON("/api/urls", function (result) {
+    vm.urlCreate = ko.observable(new Url());
+    vm.urls = ko.observableArray([]);
 
-        vm.urls = buildUrlsObservableArray(result);
-        bindViewModel();
-    });
-
+    //ViewModel operations
     vm.addNew = function() {
 
         $("#addNewModal").modal("show");
     };
 
+    vm.addNewRecord = function() { 
+
+        //Work with vm.urlCreate() here
+    };
+
+    //addNewModal stuff
+    $("#addNewModal").modal();
+    $("#addNewModal").modal("hide");
+    $("#addNewModal").modal("refresh");
+    $('#addNewModal').on('hidden', function () {
+        
+        //clear the vm.urlCreate instance
+        vm.urlCreate(new Url());
+    });
+
+    //helper functions
     function bindViewModel() {
 
         ko.applyBindings(vm);
@@ -27,7 +41,8 @@ window.urlShrinker = {};
 
     function buildUrlsObservableArray(json) {
 
-        var arrayOfUrl = ko.observableArray();
+        //var arrayOfUrl = ko.observableArray();
+        var arrayOfUrl = [];
 
         $.each(json, function (i, d) {
 
@@ -37,11 +52,11 @@ window.urlShrinker = {};
                     .Url(d.Url)
                     .CreatedOn(d.CreatedOn)
                     .UpdatedOn(d.UpdatedOn);
-
+                    
             arrayOfUrl.push(_tempUrl);
         });
 
-        return arrayOfUrl();
+        return arrayOfUrl;
     }
 
     //domain models
@@ -55,5 +70,14 @@ window.urlShrinker = {};
         self.CreatedOn = ko.observable();
         self.UpdatedOn = ko.observable();
     }
+
+    $.getJSON("/api/urls", function (result) {
+
+        vm.urls(
+            buildUrlsObservableArray(result)
+        );
+
+        bindViewModel();
+    });
 
 } (urlShrinker));

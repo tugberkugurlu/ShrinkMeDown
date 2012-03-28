@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TugberkUg.UrlShrinker.Data.DataAccess.ShortenedUrl
+@{
     ViewBag.Title = "Index";
 }
 
@@ -8,9 +9,7 @@
     <script>
         (function () {
             $(function () {
-                $("#addNewModal").modal();
-                $("#addNewModal").modal("hide");
-                $("#addNewModal").modal("refresh");
+
             });
         } ());
     </script>
@@ -59,11 +58,15 @@
         <h3>Modal header</h3>
       </div>
       <div class="modal-body">
-        <p>One fine body…</p>
+        <div>@Html.LabelFor(m => m.Alias)</div>
+        <div>
+            @Html.TextBoxFor(m => m.Alias, new { data_bind = "value: urlCreate().Alias" })
+            <span data-bind="text: urlCreate().Alias"></span>
+        </div>
       </div>
       <div class="modal-footer">
         <a href="#" class="btn">Close</a>
-        <a href="#" class="btn btn-primary">Save changes</a>
+        <a href="#" class="btn btn-primary" data-bind="click: addNewRecord">Save changes</a>
       </div>
     </div>
 }
